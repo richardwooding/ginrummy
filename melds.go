@@ -81,9 +81,9 @@ func (s *solver) emitSets(idxs []int) {
 	if len(idxs) != 4 {
 		return
 	}
-	for skip := 0; skip < 4; skip++ {
+	for skip := range 4 {
 		sub := make([]int, 0, 3)
-		for j := 0; j < 4; j++ {
+		for j := range 4 {
 			if j != skip {
 				sub = append(sub, idxs[j])
 			}
@@ -122,7 +122,7 @@ func (s *solver) runsInSuit(idxs []int) {
 
 // emitSubRuns adds every contiguous slice of block with length 3 or more.
 func (s *solver) emitSubRuns(block []int) {
-	for start := 0; start < len(block); start++ {
+	for start := range block {
 		for end := start + 3; end <= len(block); end++ {
 			s.cands = append(s.cands, clone(block[start:end]))
 		}
@@ -173,7 +173,7 @@ func (s *solver) asDeadwood(i int, resolved uint16) partial {
 }
 
 func firstUnresolved(resolved uint16, n int) int {
-	for i := 0; i < n; i++ {
+	for i := range n {
 		if resolved&(1<<uint(i)) == 0 {
 			return i
 		}
